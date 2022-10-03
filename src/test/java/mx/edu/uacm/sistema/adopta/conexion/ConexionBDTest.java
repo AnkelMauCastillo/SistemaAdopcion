@@ -1,5 +1,8 @@
 package mx.edu.uacm.sistema.adopta.conexion;
 
+import mx.edu.uacm.sistema.adopta.modelo.Usuario;
+import mx.edu.uacm.sistema.adopta.repositorio.UsuarioRepositorio;
+import mx.edu.uacm.sistema.adopta.repositorio.UsuarioRepositorioImpl;
 import org.junit.jupiter.api.Test;
 
 
@@ -62,6 +65,22 @@ class ConexionBDTest {
 
 
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Test
+    public void pruebaRepo() {
+        try (Connection conn = ConexionBD.getInstance()
+
+        ) {
+            UsuarioRepositorio<Usuario> usuarioRepositorio = new UsuarioRepositorioImpl();
+            usuarioRepositorio.listar().forEach(System.out::println);
+
+            System.out.println("Busqueda por Id");
+            //System.out.println(usuarioRepositorio.porId(2));
 
         } catch (SQLException e) {
             e.printStackTrace();

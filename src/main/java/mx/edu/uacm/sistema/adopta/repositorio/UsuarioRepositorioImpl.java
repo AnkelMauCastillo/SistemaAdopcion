@@ -3,6 +3,7 @@ package mx.edu.uacm.sistema.adopta.repositorio;
 import mx.edu.uacm.sistema.adopta.conexion.ConexionBD;
 import mx.edu.uacm.sistema.adopta.modelo.Usuario;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,7 +59,16 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio<Usuario>{
         u.setGeneroUsuario(rs.getString("genero_usuario"));
         u.setEmailUsuario(rs.getString("email_usuario"));
         u.setEdadUsuario(rs.getInt("edad_usuario"));
-
+        u.setCalleUsuario(rs.getString("calle_usuario"));
+        u.setCodigoPostalUsuario(rs.getInt("codigo_postal_usuario"));
+        u.setAlcaldia(rs.getString("alcaldia"));
+        u.setColonia(rs.getString("colonia"));
+        u.setNumeroInterior(rs.getInt("num_interior"));
+        u.setNumeroExterior(rs.getInt("num_exterior"));
+        u.setCelUsuario(rs.getInt("cel_usuario"));
+        u.setTelFijoUsuario(rs.getInt("tel_fijo_usuario"));
+        u.setComprobanteDomicilioFile((File) rs.getBlob("comp_domicilio_arch"));
+        u.setIdentificacionOficialFile((File) rs.getBlob("identificacion_arch"));
         return u;
     }
 }
