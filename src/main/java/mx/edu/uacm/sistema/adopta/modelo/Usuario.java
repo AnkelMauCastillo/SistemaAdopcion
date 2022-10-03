@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Usuario {
     private int idUsuario;
-    private int id_rol_usuario;
+    private int idRolUsuario;
     private String nombreUsuario;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -32,12 +32,12 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
-    public int getId_rol_usuario() {
-        return id_rol_usuario;
+    public int getIdRolUsuario() {
+        return idRolUsuario;
     }
 
-    public void setId_rol_usuario(int id_rol_usuario) {
-        this.id_rol_usuario = id_rol_usuario;
+    public void setIdRolUsuario(int idRolUsuario) {
+        this.idRolUsuario = idRolUsuario;
     }
 
     public String getNombreUsuario() {
@@ -176,11 +176,36 @@ public class Usuario {
         this.identificacionOficialFile = identificacionOficialFile;
     }
 
+    public Usuario() {
+    }
+
+    public Usuario(int idUsuario, int idRolUsuario, String nombreUsuario, String apellidoPaterno, String apellidoMaterno, Date fechaNcimientoUsuario, String generoUsuario, String emailUsuario, int edadUsuario, String calleUsuario, int codigoPostalUsuario, String alcaldia, String colonia, int numeroExterior, int numeroInterior, int celUsuario, int telFijoUsuario, File comprobanteDomicilioFile, File identificacionOficialFile) {
+        this.idUsuario = idUsuario;
+        this.idRolUsuario = idRolUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaNcimientoUsuario = fechaNcimientoUsuario;
+        this.generoUsuario = generoUsuario;
+        this.emailUsuario = emailUsuario;
+        this.edadUsuario = edadUsuario;
+        this.calleUsuario = calleUsuario;
+        this.codigoPostalUsuario = codigoPostalUsuario;
+        this.alcaldia = alcaldia;
+        this.colonia = colonia;
+        this.numeroExterior = numeroExterior;
+        this.numeroInterior = numeroInterior;
+        this.celUsuario = celUsuario;
+        this.telFijoUsuario = telFijoUsuario;
+        this.comprobanteDomicilioFile = comprobanteDomicilioFile;
+        this.identificacionOficialFile = identificacionOficialFile;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
                 "idUsuario=" + idUsuario +
-                ", id_rol_usuario=" + id_rol_usuario +
+                ", id_rol_usuario=" + idRolUsuario +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", apellidoPaterno='" + apellidoPaterno + '\'' +
                 ", apellidoMaterno='" + apellidoMaterno + '\'' +
