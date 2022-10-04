@@ -21,7 +21,7 @@ class UsuarioRepositorioImplTest {
             usuarioRepositorio.listar().forEach(System.out::println);
 
             System.out.println("Busqueda por Id");
-            System.out.println(usuarioRepositorio.porId(2));
+            System.out.println(usuarioRepositorio.porId(2L));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,6 +44,40 @@ class UsuarioRepositorioImplTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void actualizar(){
+        try (Connection conn = ConexionBD.getInstance()){
+            UsuarioRepositorio<Usuario> usuarioRepositorio = new UsuarioRepositorioImpl();
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(3L);
+            usuario.setIdRolUsuario(1);
+            usuario.setNombreUsuario("Kari Bebé");
+            //usuario.setEmailUsuario("kariBebe@uacm.edu.mx");
+            usuario.setFechaNcimientoUsuario(new Date());
+            usuarioRepositorio.guardar(usuario);
+            System.out.println("Producto Guardado Con exito");
+            pruebaRepo();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Test
+    public void eliminar(){
+        try (Connection conn = ConexionBD.getInstance()){
+            UsuarioRepositorio<Usuario> usuarioRepositorio = new UsuarioRepositorioImpl();
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(4L);
+            usuarioRepositorio.eliminar(usuario.getIdUsuario());
+            System.out.println("Producto Eliminado con Exito");
+            pruebaRepo();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

@@ -31,7 +31,7 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio<Usuario>{
     }
 
     @Override
-    public Usuario porId(int id) {
+    public Usuario porId(Long id) {
         Usuario usuario = null;
         try (PreparedStatement stmt = geConnection().prepareStatement("SELECT  * FROM  usuarios WHERE ID_USUARIO= ?")) {
             stmt.setLong(1, id);
@@ -46,11 +46,13 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio<Usuario>{
         return usuario;
     }
 
+
+
     @Override
     public void guardar(Usuario usuario) {
         String sql;
         if ((usuario.getIdUsuario() != null) && usuario.getIdUsuario()>0) {
-            sql = "UPDATE usuarios Set `id_rol_usuario`=?,`nombre_usuario`=?, `apellido_paterno_usuario`=?, `apellido_materno_usuario`=?, `genero_usuario`=?, `email_usuario`=?, `edad_usuario`=?, `calle_usuario`=?, `codigo_postal_usuario`=?, `alcaldia`=?, `colonia`=?, `num_exterior`=?, `num_interior`=?, `cel_usuario`=?, `tel_fijo_usuario`=? where id_usuario=?";
+            sql = "UPDATE usuarios Set `id_rol_usuario`=?,`nombre_usuario`=?, `fecha_nacimiento`=?   where id_usuario=?";
         } else {
             sql = "INSERT INTO `usuarios` (`id_rol_usuario`, `nombre_usuario`,  `fecha_nacimiento`,  `email_usuario`) VALUES (?, ?, ?, ?)";
         }
@@ -76,8 +78,9 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio<Usuario>{
 
     }
 
+
     @Override
-    public void eliminar(int id) {
+    public void eliminar(Long id) {
         try (PreparedStatement stmt = geConnection().prepareStatement("DELETE From usuarios WHERE  id_usuario=?")){
             stmt.setLong(1, id);
             stmt.executeUpdate();

@@ -6,11 +6,11 @@ public interface UsuarioRepositorio <T>{
 
     List<T> listar();
 
-    T porId(int id);
+    T porId(Long id);
 
     void guardar(T t);
 
-    void eliminar(int id);
+    void eliminar(Long id);
 
 
 }
