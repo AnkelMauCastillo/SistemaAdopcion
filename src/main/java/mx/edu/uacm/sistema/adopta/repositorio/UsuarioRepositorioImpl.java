@@ -4,10 +4,7 @@ import mx.edu.uacm.sistema.adopta.conexion.ConexionBD;
 import mx.edu.uacm.sistema.adopta.modelo.Usuario;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,22 +32,65 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio<Usuario>{
 
     @Override
     public Usuario porId(int id) {
-        return null;
+        Usuario usuario = null;
+        try (PreparedStatement stmt = geConnection().prepareStatement("SELECT  * FROM  usuarios WHERE ID_USUARIO= ?")) {
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    usuario = crearUsuario(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
     }
 
     @Override
     public void guardar(Usuario usuario) {
+        String sql;
+        if ((usuario.getIdUsuario() != null) && usuario.getIdUsuario()>0) {
+            sql = "UPDATE usuarios Set `id_rol_usuario`=?,`nombre_usuario`=?, `apellido_paterno_usuario`=?, `apellido_materno_usuario`=?, `genero_usuario`=?, `email_usuario`=?, `edad_usuario`=?, `calle_usuario`=?, `codigo_postal_usuario`=?, `alcaldia`=?, `colonia`=?, `num_exterior`=?, `num_interior`=?, `cel_usuario`=?, `tel_fijo_usuario`=? where id_usuario=?";
+        } else {
+            sql = "INSERT INTO `usuarios` (`id_rol_usuario`, `nombre_usuario`,  `fecha_nacimiento`,  `email_usuario`) VALUES (?, ?, ?, ?)";
+        }
+        try(PreparedStatement stmt = geConnection().prepareStatement(sql)) {
+            stmt.setLong(1, usuario.getIdRolUsuario());
+            stmt.setString(2, usuario.getNombreUsuario());
+            stmt.setDate(3, new Date(usuario.getFechaNcimientoUsuario().getTime()));
+
+            if ((usuario.getIdUsuario() != null) && usuario.getIdUsuario()>0) {
+                stmt.setLong(4, usuario.getIdUsuario());
+            } else {
+                stmt.setString(4, usuario.getEmailUsuario());
+
+            }
+
+            stmt.executeUpdate();
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
 
     }
 
     @Override
     public void eliminar(int id) {
+        try (PreparedStatement stmt = geConnection().prepareStatement("DELETE From usuarios WHERE  id_usuario=?")){
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
 
     }
 
     private static Usuario crearUsuario(ResultSet rs) throws SQLException {
         Usuario u = new Usuario();
-        u.setIdUsuario(rs.getInt("id_usuario"));
+        u.setIdUsuario(rs.getLong("id_usuario"));
         u.setIdRolUsuario(rs.getInt("id_rol_usuario"));
         u.setNombreUsuario(rs.getString("nombre_usuario"));
         u.setApellidoPaterno(rs.getString("apellido_paterno_usuario"));

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Date;
 
 public class Usuario {
-    private int idUsuario;
+    private Long idUsuario;
     private int idRolUsuario;
     private String nombreUsuario;
     private String apellidoPaterno;
@@ -24,11 +24,11 @@ public class Usuario {
     private File comprobanteDomicilioFile;
     private File identificacionOficialFile;
 
-    public int getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -179,7 +179,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, int idRolUsuario, String nombreUsuario, String apellidoPaterno, String apellidoMaterno, Date fechaNcimientoUsuario, String generoUsuario, String emailUsuario, int edadUsuario, String calleUsuario, int codigoPostalUsuario, String alcaldia, String colonia, int numeroExterior, int numeroInterior, int celUsuario, int telFijoUsuario, File comprobanteDomicilioFile, File identificacionOficialFile) {
+    public Usuario(Long idUsuario, int idRolUsuario, String nombreUsuario, String apellidoPaterno, String apellidoMaterno, Date fechaNcimientoUsuario, String generoUsuario, String emailUsuario, int edadUsuario, String calleUsuario, int codigoPostalUsuario, String alcaldia, String colonia, int numeroExterior, int numeroInterior, int celUsuario, int telFijoUsuario, File comprobanteDomicilioFile, File identificacionOficialFile) {
         this.idUsuario = idUsuario;
         this.idRolUsuario = idRolUsuario;
         this.nombreUsuario = nombreUsuario;
@@ -201,7 +201,6 @@ public class Usuario {
         this.identificacionOficialFile = identificacionOficialFile;
     }
 
-    @Override
     public String toString() {
         return "Usuario{" +
                 "idUsuario=" + idUsuario +

@@ -71,21 +71,6 @@ class ConexionBDTest {
         }
 
     }
-    @Test
-    public void pruebaRepo() {
-        try (Connection conn = ConexionBD.getInstance()
 
-        ) {
-            UsuarioRepositorio<Usuario> usuarioRepositorio = new UsuarioRepositorioImpl();
-            usuarioRepositorio.listar().forEach(System.out::println);
-
-            System.out.println("Busqueda por Id");
-            //System.out.println(usuarioRepositorio.porId(2));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }
